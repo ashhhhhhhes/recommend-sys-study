@@ -28,6 +28,23 @@ random.seed(0)
 
 # Load up common data set for the recommender algorithms
 (evaluationData, rankings) = LoadProductData()
-
+print(evaluationData)
 print("\nLoad completed datas")
 
+#TODO evaluator LeaveOneOut min_n_ratings is too hight? 이슈 수정 .
+
+# Construct an Evaluator to, you know, evaluate them
+evaluator = Evaluator(evaluationData, rankings)
+print("\nConstruct Evaluator")
+
+# Throw in an SVD recommender
+#SVDAlgorithm = SVD(random_state=10)
+#evaluator.AddAlgorithm(SVDAlgorithm, "SVD")
+
+# Just make random recommendations
+#Random = NormalPredictor()
+#evaluator.AddAlgorithm(Random, "Random")
+
+
+# Fight!
+#evaluator.Evaluate(True)

@@ -32,24 +32,25 @@ class ProductData:
         # Look for files relative to the directory we are running from
         os.chdir(os.path.dirname(sys.argv[0]))
 
-        ratingsDataset = 0
+        reviewDataset = 0
         self.productID_to_name = {}
         self.name_to_productID = {}
 
         reader = Reader(line_format='user item rating timestamp', sep=',', skip_lines=1)
 
-        ratingsDataset = Dataset.load_from_file(self.ratingsPath, reader=reader)
+        reviewDataset = Dataset.load_from_file(self.reviewPath, reader=reader)
 
-        with open(self.productPath, newline='', encoding='ISO-8859-1') as csvfile:
+        with open(self.productPath, newline='', encoding='utf-8') as csvfile:
                 productReader = csv.reader(csvfile)
                 next(productReader)  #Skip header line
                 for row in productReader:
+                    print(row)
                     productId = int(row[0])
                     productName = row[1]
                     self.productID_to_name[productId] = productName
                     self.name_to_productID[productName] = productId
 
-        return ratingsDataset
+        return reviewDataset
     
     def getUserRatings(self, user):
         userRatings = []
@@ -78,8 +79,9 @@ class ProductData:
             next(ratingReader)
             for row in ratingReader:
                 productId = int(row[0])
-                ratings[productId] = int(row[1])
+                ratings[productId] = int(row[1]) + int(row[3])
         rank = 1
+        
         for productId, ratingCount in sorted(ratings.items(), key=lambda x: x[1], reverse=True):
             rankings[productId] = rank
             rank += 1

@@ -21,7 +21,7 @@ class EvaluationData:
         
         #Build a 75/25 train/test split for measuring accuracy
         self.trainSet, self.testSet = train_test_split(data, test_size=.25, random_state=1)
-        
+
         #Build a "leave one out" train/test split for evaluating top-N recommenders
         #And build an anti-test-set for building predictions
         LOOCV = LeaveOneOut(n_splits=1, random_state=1)
