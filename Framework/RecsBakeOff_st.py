@@ -38,13 +38,13 @@ evaluator = Evaluator(evaluationData, rankings)
 print("\nConstruct Evaluator")
 
 # Throw in an SVD recommender
-#SVDAlgorithm = SVD(random_state=10)
-#evaluator.AddAlgorithm(SVDAlgorithm, "SVD")
+SVDAlgorithm = SVD(random_state=10)
+evaluator.AddAlgorithm(SVDAlgorithm, "SVD")
 
 # Just make random recommendations
-#Random = NormalPredictor()
-#evaluator.AddAlgorithm(Random, "Random")
+Random = NormalPredictor()
+evaluator.AddAlgorithm(Random, "Random")
 
 
 # Fight!
-#evaluator.Evaluate(True)
+evaluator.Evaluate(True)

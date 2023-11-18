@@ -44,7 +44,6 @@ class ProductData:
                 productReader = csv.reader(csvfile)
                 next(productReader)  #Skip header line
                 for row in productReader:
-                    print(row)
                     productId = int(row[0])
                     productName = row[1]
                     self.productID_to_name[productId] = productName
